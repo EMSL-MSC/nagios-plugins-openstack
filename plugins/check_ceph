@@ -1,1 +1,29 @@
 #!/bin/bash
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+PROGNAME=`basename $0`
+PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
+REVISION="1.4.16"
+
+. $PROGPATH/utils.sh
+
+export CEPH_ARGS="--id client.nagios"
+case "$(ceph health)" in
+	HEALTH_OK*)
+		echo OK
+		exit $STATE_OK
+	;;
+	HEALTH_WARN*)
+		ceph health -v
+		exit $STATE_WARNING
+	;;
+	HEALTH_ERR*)
+		ceph health -v
+		exit $STATE_CRITICAL
+	;;
+	*)
+		ceph health -v 2>&1
+		exit $STATE_UNKNOWN
+esac
+
