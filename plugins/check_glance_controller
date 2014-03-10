@@ -7,4 +7,9 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 
 . $PROGPATH/utils.sh
 
-
+if ! glance image-list >/dev/null 2>&1 ; then
+	glance image-list
+	exit $STATE_CRITICAL
+fi
+echo OK
+exit $STATE_OK
