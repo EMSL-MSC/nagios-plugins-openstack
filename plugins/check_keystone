@@ -9,8 +9,8 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 
 . /etc/nagios/keystonerc_nagios
 
-if ! keystone user-get SVC-mscf-nagios >/dev/null 2>&1 ; then
-	keystone user-get SVC-mscf-nagios 2>&1
+if ! keystone user-get $OS_USERNAME >/dev/null 2>&1 ; then
+	keystone user-get $OS_USERNAME 2>&1
 	exit $STATE_CRITICAL
 fi
 echo OK
