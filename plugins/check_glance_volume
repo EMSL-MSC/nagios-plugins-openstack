@@ -8,3 +8,22 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 . $PROGPATH/utils.sh
 
 . /etc/nagios/keystonerc_nagios
+
+tmp_img=$(mktemp)
+if ! qemu-img create -f qcow2 $tmp_img 10G ; then
+	echo Unable to make temporary image
+	rm -f $tmp_img
+	exit $STATE_CRITICAL
+fi
+OUTPUT=$(glance image-create --is-public False --owner admin --container-format bare --disk-format qcow2 --min-disk 10 --name nagios-check < $tmp_img 2>&1)
+RC=$?
+if [[ $RC != 0 ]] ; then
+	echo $OUTPUT
+	exit $STATE_CRITICAL
+fi
+IDS=$(glance image-list --owner admin | grep nagios-check | awk '{ print $2 }')
+for ID in $IDS
+do
+	glance image-delete $ID
+done
+exit $STATE_OK

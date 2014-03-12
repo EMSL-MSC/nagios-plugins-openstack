@@ -8,3 +8,10 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 . $PROGPATH/utils.sh
 
 . /etc/nagios/keystonerc_nagios
+
+if ! heat list > /dev/null 2>&1 ; then
+	heat list 2>&1
+	exit $STATE_CRITICAL
+fi
+echo OK
+exit $STATE_OK
