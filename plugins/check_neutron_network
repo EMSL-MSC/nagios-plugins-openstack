@@ -8,3 +8,16 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 . $PROGPATH/utils.sh
 
 . /etc/nagios/keystonerc_nagios
+
+OUTPUT=$(neutron net-create nagios-test 2>&1)
+RC=$?
+if [[ $? != 0 ]] ; then
+	echo $OUTPUT
+	exit $STATE_CRITICAL
+fi
+IDS=$(neutron net-list | grep nagios-test | awk '{ print $2 }')
+for ID in $IDS ; do
+	neutron net-delete $ID
+done
+echo OK
+exit $STATE_OK
