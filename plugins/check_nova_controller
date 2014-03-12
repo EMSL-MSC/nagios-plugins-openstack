@@ -8,3 +8,10 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 . $PROGPATH/utils.sh
 
 . /etc/nagios/keystonerc_nagios
+
+if ! nova list > /dev/null 2>&1 ; then
+	nova list 2>&1
+	exit $STATE_CRITICAL
+fi
+echo OK
+exit $STATE_OK
