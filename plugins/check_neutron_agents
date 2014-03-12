@@ -1,0 +1,17 @@
+#!/bin/bash
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+PROGNAME=`basename $0`
+PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
+
+. $PROGPATH/utils.sh
+
+. /etc/nagios/keystonerc_nagios
+
+if neutron agent-list -f csv -c alive | grep -qi xxx ; then
+	neutron agent-list -c host -c alive | grep -i xxx 2>&1
+	exit $STATE_WARN
+fi
+echo OK
+exit $STATE_OK
