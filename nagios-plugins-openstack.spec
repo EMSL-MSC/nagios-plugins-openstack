@@ -1,5 +1,5 @@
 Name:		nagios-plugins-openstack
-Version:	0.1
+Version:	0.2
 Release:	1%{?dist}
 Summary:	Nagios Openstack Plugins
 
@@ -9,7 +9,7 @@ URL:		http://www.example.com
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-Requires:	/usr/bin/ceph, /usr/bin/cinder, /usr/bin/glance
+Requires:	/usr/bin/ceph, /usr/bin/cinder, /usr/bin/glance, /usr/bin/keystone, /usr/bin/heat, /usr/bin/neutron, /usr/bin/nova
 
 %description
 some nagios checks that calls user programs to see if things are working
