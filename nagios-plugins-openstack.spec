@@ -9,7 +9,7 @@ URL:		http://www.example.com
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
-Requires:	/usr/bin/ceph, /usr/bin/cinder, /usr/bin/glance, /usr/bin/keystone, /usr/bin/heat, /usr/bin/neutron, /usr/bin/nova
+Requires:	/usr/bin/ceph, /usr/bin/cinder, /usr/bin/glance, /usr/bin/keystone, /usr/bin/heat, /usr/bin/neutron, /usr/bin/nova, /usr/bin/openstack-status
 
 %description
 some nagios checks that calls user programs to see if things are working
