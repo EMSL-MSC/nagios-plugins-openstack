@@ -7,7 +7,7 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 
 . $PROGPATH/utils.sh
 
-export CEPH_ARGS="--id client.nagios"
+export CEPH_ARGS="--id nagios"
 case "$(ceph health)" in
 	HEALTH_OK*)
 		echo OK
