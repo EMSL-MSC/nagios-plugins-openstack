@@ -14,15 +14,15 @@ case "$(ceph health)" in
 		exit $STATE_OK
 	;;
 	HEALTH_WARN*)
-		ceph health -v
+		ceph health detail
 		exit $STATE_WARNING
 	;;
 	HEALTH_ERR*)
-		ceph health -v
+		ceph health detail
 		exit $STATE_CRITICAL
 	;;
 	*)
-		ceph health -v 2>&1
+		ceph health detail 2>&1
 		exit $STATE_UNKNOWN
 esac
 

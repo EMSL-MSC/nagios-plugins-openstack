@@ -1,6 +1,6 @@
 Name:		nagios-plugins-openstack
 Version:	0.2
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	Nagios Openstack Plugins
 
 Group:		System Environment/Base
