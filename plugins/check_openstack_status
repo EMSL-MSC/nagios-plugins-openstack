@@ -7,7 +7,7 @@ PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 
 . $PROGPATH/utils.sh
 
-if ! which openstack-status ; then
+if ! which openstack-status > /dev/null 2>&1; then
     which openstack-status 2>&1
     exit $STATE_CRITICAL
 fi

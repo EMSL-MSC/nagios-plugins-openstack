@@ -17,7 +17,7 @@ if [[ $? != 0 ]] ; then
 fi
 IDS=$(neutron net-list | grep nagios-test | awk '{ print $2 }')
 for ID in $IDS ; do
-	neutron net-delete $ID
+	neutron net-delete $ID > /dev/null 2>&1
 done
 echo OK
 exit $STATE_OK
