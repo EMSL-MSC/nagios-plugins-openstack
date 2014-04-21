@@ -28,4 +28,5 @@ do
 	glance image-delete $ID
 done
 rm -f $tmp_img
+echo OK
 exit $STATE_OK
